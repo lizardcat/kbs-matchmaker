@@ -11,6 +11,7 @@ This project is an interactive KBS that helps match profiles based on weighted c
 1. You will be added as a collaborator on the repository.
 2. Clone the repository to your local machine by typing the following in your terminal: git clone https://github.com/lizardcat/kbs-matchmaking.git
 3. Open the project in VS Code or your preferred IDE.
+4. Install ipywidgets by typing the following in your terminal: `pip install ipywidgets`
 
 ## 👥 Collaboration & Issue Tracking
 We will use GitHub's **Issues** feature to propose ideas and track improvements for the system:
