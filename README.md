@@ -1,41 +1,78 @@
-# Knowledge-Based Matchmaking System
+# Matchmaking Knowledge-Based System Overview
 
-This project is an interactive KBS that helps match profiles based on weighted compatibility scores using Python and ipywidgets.
+Our project focuses on developing a matchmaking knowledge-based system designed to connect users based on shared preferences and compatibility factors. We designed the system with a Kenyan context in mind, incorporating locations and professions relevant to Kenyan users.
 
-## 🛠 Features
-- Stores user profiles in a knowledge base.
-- Uses weighted matchmaking algorithms.
-- Interactive UI using Jupyter and ipywidgets.
+The platform allows users to create profiles, customize the importance of various matching attributes, and find compatible matches based on a weighted scoring system.
 
-## 📦 Installation
-1. You will be added as a collaborator on the repository.
-2. Clone the repository to your local machine by typing the following in your terminal: git clone https://github.com/lizardcat/kbs-matchmaking.git
-3. Open the project in VS Code or your preferred IDE.
-4. Install ipywidgets by typing the following in your terminal: `pip install ipywidgets`
+The user interface, built with the `ipywidgets` library in a Jupyter Notebook environment, has two main sections: **Profile Management** and **Matchmaking**.
 
-## 👥 Collaboration & Issue Tracking
-We will use GitHub's **Issues** feature to propose ideas and track improvements for the system:
-1. If you have a suggestion or find a bug, go to the **Issues** tab on GitHub and create a new issue.
-2. Describe the issue or feature request clearly.
-3. Team members can review issues and assign themselves tasks to work on.
-4. Once a solution is ready, open a pull request for review before merging changes.
+### User Capabilities
+When using the system, users can:
+- Create or update their profiles
+- Adjust attribute weightings to prioritize what matters most to them
+- Find matches based on personalized preferences
 
-## 🔄 Using Branches to Implement Changes
-To ensure safe collaboration, always use feature branches before pushing changes to the main branch:
-1. Create a new branch from `main`:
-   ```sh
-   git checkout -b feature-branch
-   ```
-2. Make your changes and commit them:
-   ```sh
-   git commit -m "Implemented new matchmaking rule"
-   ```
-3. Push the branch to GitHub:
-   ```sh
-   git push origin feature-branch
-   ```
-4. Open a pull request (PR) for review.
-5. After approval, merge the branch into `main` and delete the feature branch.
+This design ensures that users are not limited to a one-size-fits-all approach but can instead refine the matchmaking process according to their unique relationship goals and lifestyle preferences.
 
-This workflow ensures that changes are reviewed and tested before being merged into the main project.
+---
+
+# Description of Rules and Scoring Logic
+
+Our matchmaking system considers **8 attributes** to determine compatibility between users:
+
+1. **Age** – The user’s age is factored into compatibility, with a penalty applied if the age difference is significant.
+2. **Gender & Preferred Gender** – Users specify their gender and the gender they prefer in a match. If preferences are not aligned, compatibility is zero.
+3. **Location** – Users with the same location are given a higher compatibility score, as proximity is often an important factor in relationships.
+4. **Interests** – Shared interests are crucial. A user with common hobbies, passions, or pastimes with another will have a higher compatibility score.
+5. **Education Level** – Having a similar education level contributes to compatibility since it often reflects shared values and intellectual compatibility.
+6. **Occupation** – Matches with the same profession or within similar fields may score higher, as they might better understand each other’s lifestyles.
+7. **Relationship Goals** – Users indicate their goals, such as looking for a casual relationship, a long-term commitment, or marriage. Misalignment reduces compatibility.
+8. **Lifestyle** – Lifestyle choices like smoking status or activity level also impact compatibility. Users with matching lifestyles score higher.
+
+---
+
+## Scoring Mechanism
+The matchmaking process uses a set of predefined rules and a **weighted scoring system**. The system compares these attributes between the user and other profiles in the database, calculating a compatibility score based on both similarity and user-defined weightings.
+
+### Scoring Rules:
+- **Age Difference**: Max +20 points, Min 0 points. If the age gap is within 10 years, a proportional score is awarded. The smaller the gap, the higher the score.
+- **Shared Interests**: Max +30 points. A Jaccard similarity index measures overlap. Example: 3 out of 6 shared interests = +15 points.
+- **Same City**: +15 points. Living in the same city grants +10 points.
+- **Education Match**: +10 points.
+- **Same Occupation**: +10 points.
+- **Lifestyle Match**: +15 points.
+- **Gender Preference Alignment**: Automatic disqualification if preferences do not align.
+
+Each attribute’s score is **multiplied by its weight** and summed to produce a final compatibility score. The system ranks matches based on this score, presenting users with the most compatible profiles.
+
+Users can **adjust the weight** of each attribute within the Profile Management tab. For instance, a user who values shared interests more than location can increase the interest weight and decrease the location weight to tailor the matchmaking process.
+
+---
+
+# Screenshots of Matchmaking Results
+## 1. **Profile Management Tab**
+![Profile Management Tab](/assets/kbs_dating_1.png)
+
+## 2. **Adjust Matchmaking Weights**
+![Adjust Matchmaking Weights](/assets/kbs_dating_3.png)
+
+## 3. **Matchmaking Tab**
+![Matchmaking Tab](/assets/kbs_dating_4.png)
+
+---
+
+# Reflection on Limitations and Future Improvements
+
+While our current implementation successfully connects users based on defined rules and custom preferences, several limitations exist:
+
+- The system relies solely on **user-inputted data** and rule-based matching, which lacks adaptability and nuance.
+- There is **no mechanism** to account for evolving user preferences or behavior patterns beyond the initial profile setup.
+
+### Planned Improvements:
+- Implement a **dynamic input system** allowing users to describe their ideal match in free text.
+- Use **Natural Language Processing (NLP)** to process user input by removing stop words, normalizing text, and extracting key phrases.
+- Match extracted keywords against profiles to factor in both explicit preferences and implicit compatibility indicators.
+- Transition from `ipywidgets` to a **web-based platform like Streamlit**, enabling deployment as an interactive web application.
+
+This deployment would make the system more accessible, facilitate user feedback, and support continuous improvement.
 
